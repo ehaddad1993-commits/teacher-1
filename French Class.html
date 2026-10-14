@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>French Class</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schoolbell&family=Source+Sans+3:wght@400;600;700&display=swap">
+<style id="css">
+:root{
+  --paper:#f7f9fd; --line:#cfdcf2; --margin:#d4566b; --ink:#1d2a5c; --muted:#5b6690;
+  --card:#ffffff; --border:#d9e1f2; --accent:#2f4bb5; --accent-ink:#ffffff;
+  --ok:#1f7a4d; --okbg:#e3f4ea; --no:#b3263e; --nobg:#fbe6ea; --late:#8a5a00; --latebg:#fff0cf;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#10162b; --line:#1f2a4d; --margin:#e0708a; --ink:#e6ebff; --muted:#9aa6d1;
+    --card:#182041; --border:#2a355f; --accent:#7f99ff; --accent-ink:#0d1330;
+    --ok:#6fdca0; --okbg:#173a2b; --no:#ff8fa3; --nobg:#40202b; --late:#ffd37a; --latebg:#3d3217;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#10162b; --line:#1f2a4d; --margin:#e0708a; --ink:#e6ebff; --muted:#9aa6d1;
+  --card:#182041; --border:#2a355f; --accent:#7f99ff; --accent-ink:#0d1330;
+  --ok:#6fdca0; --okbg:#173a2b; --no:#ff8fa3; --nobg:#40202b; --late:#ffd37a; --latebg:#3d3217;
+  color-scheme:dark;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.5 "Source Sans 3",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px 96px}
+header.top{
+  background:
+    linear-gradient(90deg,transparent 46px,var(--margin) 46px,var(--margin) 48px,transparent 48px),
+    repeating-linear-gradient(0deg,var(--paper) 0,var(--paper) 27px,var(--line) 27px,var(--line) 28px);
+  border-bottom:2px solid var(--border);
+  padding:22px 16px 16px 66px;
+}
+header.top .in{max-width:860px;margin:0 auto}
+h1{font:400 30px/1.2 Schoolbell,"Segoe Print","Comic Sans MS",cursive;margin:0}
+h1 input{font:inherit;color:inherit;background:transparent;border:0;border-bottom:2px dashed var(--border);width:100%;padding:0}
+.sub{color:var(--muted);margin:4px 0 0;font-size:14px}
+.badge{display:inline-block;margin-top:8px;padding:2px 10px;border-radius:99px;font-size:13px;font-weight:600;border:1px solid var(--border);background:var(--card);color:var(--muted)}
+.badge.edit{color:var(--ok);background:var(--okbg);border-color:transparent}
+nav.tabs{display:flex;gap:6px;overflow-x:auto;padding:12px 0 0;margin-bottom:14px;border-bottom:1px solid var(--border)}
+nav.tabs button{flex:0 0 auto;border:0;background:transparent;color:var(--muted);font:600 15px "Source Sans 3",system-ui,sans-serif;padding:8px 14px;border-radius:8px 8px 0 0;cursor:pointer;border-bottom:3px solid transparent}
+nav.tabs button small{display:block;font-weight:400;font-size:12px}
+nav.tabs button[aria-selected=true]{color:var(--ink);border-bottom-color:var(--accent);background:var(--card)}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:12px}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.grow{flex:1 1 auto}
+label.f{display:block;font-size:14px;font-weight:600;margin:10px 0 4px}
+input[type=text],input[type=date],input[type=url],textarea{width:100%;font:inherit;color:var(--ink);background:var(--paper);border:1px solid var(--border);border-radius:8px;padding:8px 10px}
+textarea{min-height:88px;resize:vertical}
+.btn{font:600 15px "Source Sans 3",system-ui,sans-serif;border:1px solid var(--border);background:var(--card);color:var(--ink);padding:8px 14px;border-radius:8px;cursor:pointer}
+.btn.pri{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.btn.del{color:var(--no)}
+.btn:disabled{opacity:.5;cursor:default}
+.stu{display:flex;align-items:center;gap:10px;padding:8px 0;border-top:1px solid var(--border)}
+.stu:first-child{border-top:0}
+.stu .nm{flex:1 1 auto;min-width:0;overflow-wrap:anywhere}
+.seg{display:flex;gap:4px}
+.seg button{border:1px solid var(--border);background:var(--paper);color:var(--muted);font:600 14px "Source Sans 3",system-ui,sans-serif;padding:6px 10px;border-radius:8px;cursor:pointer;min-width:44px}
+.seg button[disabled]{cursor:default}
+.seg button.on.P{background:var(--okbg);color:var(--ok);border-color:var(--ok)}
+.seg button.on.A{background:var(--nobg);color:var(--no);border-color:var(--no)}
+.seg button.on.L{background:var(--latebg);color:var(--late);border-color:var(--late)}
+.sum{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 10px}
+.chip{padding:3px 10px;border-radius:99px;font-size:14px;font-weight:600}
+.chip.P{background:var(--okbg);color:var(--ok)} .chip.A{background:var(--nobg);color:var(--no)} .chip.L{background:var(--latebg);color:var(--late)} .chip.U{background:var(--paper);color:var(--muted);border:1px solid var(--border)}
+.scroll{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:15px}
+th,td{text-align:left;padding:7px 10px;border-bottom:1px solid var(--border);white-space:nowrap}
+th{color:var(--muted);font-weight:600}
+.item h3{margin:0 0 2px;font-size:18px}
+.item .meta{color:var(--muted);font-size:13px;margin-bottom:6px}
+.item p{margin:0;white-space:pre-wrap;overflow-wrap:anywhere}
+.item a{color:var(--accent);font-weight:600;overflow-wrap:anywhere}
+.empty{color:var(--muted);text-align:center;padding:22px 8px}
+.savebar{position:fixed;left:0;right:0;bottom:0;z-index:5;background:var(--card);border-top:1px solid var(--border);padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px))}
+.savebar .in{max-width:860px;margin:0 auto;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.msg{font-size:14px;color:var(--muted)}
+.msg.err{color:var(--no)}
+@media (max-width:520px){.stu{flex-wrap:wrap}.seg{width:100%}.seg button{flex:1}}
+@media (prefers-reduced-motion:no-preference){.btn,.seg button{transition:background .15s}}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script id="data" type="application/json">{"className":"French Class","students":[{"id":"v50oyhci","name":"elie haddad"},{"id":"qnmcqrk8","name":"tekane"}],"attendance":{"2026-10-14":{"v50oyhci":"P","qnmcqrk8":"P"}},"homework":[],"notes":[],"log":[]}</script>
+<script id="app">
+(function(){
+  var S;
+  try{ S = JSON.parse(document.getElementById('data').textContent); }catch(e){ S = null; }
+  if(!S || !Array.isArray(S.students)){ S = {className:'French Class',students:[],attendance:{},homework:[],notes:[],log:[]}; }
+  ['homework','notes','log'].forEach(function(k){ if(!Array.isArray(S[k])) S[k]=[]; });
+  if(!S.attendance) S.attendance = {};
+
+  var canEdit = false, canUpload = false, dirty = false, status = '', statusErr = false;
+  var assetsApi = null;
+  var tab = 'attendance';
+  try{ tab = sessionStorage.getItem('fc-tab') || 'attendance'; }catch(e){}
+  function pad(n){ return (n<10?'0':'')+n; }
+  function todayStr(){ var d=new Date(); return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate()); }
+  var date = todayStr();
+  try{ date = sessionStorage.getItem('fc-date') || date; }catch(e){}
+  function uid(){ return Math.random().toString(36).slice(2,10); }
+  function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+  function h(tag, props){
+    var e = document.createElement(tag);
+    props = props || {};
+    Object.keys(props).forEach(function(k){
+      var v = props[k];
+      if(v===false || v==null) return;
+      if(k==='class') e.className = v;
+      else if(k==='value') e.value = v;
+      else if(k.indexOf('on')===0) e.addEventListener(k.slice(2), v);
+      else if(v===true) e.setAttribute(k,'');
+      else e.setAttribute(k,v);
+    });
+    for(var i=2;i<arguments.length;i++){
+      var kids = [].concat(arguments[i]);
+      kids.forEach(function(c){
+        if(c==null||c===false) return;
+        e.appendChild(c instanceof Node ? c : document.createTextNode(String(c)));
+      });
+    }
+    return e;
+  }
+
+  function safeUrl(u){
+    u = String(u||'').trim();
+    return /^(https?:\/\/|\/_blob\/)/i.test(u) ? u : '';
+  }
+  function fmtDate(d){
+    if(!d) return '';
+    var p = d.split('-'); if(p.length!==3) return d;
+    var dt = new Date(+p[0], +p[1]-1, +p[2]);
+    try{ return dt.toLocaleDateString(undefined,{weekday:'short',day:'numeric',month:'short',year:'numeric'}); }catch(e){ return d; }
+  }
+  function mark(){ dirty = true; status=''; renderBar(); }
+
+  /* ---------- saving ---------- */
+  function buildDoc(){
+    var css = document.getElementById('css').textContent;
+    var src = document.getElementById('app').textContent;
+    var json = JSON.stringify(S).replace(/</g,'\\u003c');
+    return '<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n'
+      + '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n'
+      + '<title>'+esc(S.className||'French Class')+'</title>\n'
+      + '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schoolbell&family=Source+Sans+3:wght@400;600;700&display=swap">\n'
+      + '<style id="css">'+css+'</style>\n</head>\n<body>\n<div id="root"></div>\n'
+      + '<script id="data" type="application/json">'+json+'<\/script>\n'
+      + '<script id="app">'+src+'<\/script>\n</body>\n</html>';
+  }
+  async function save(){
+    var a = null;
+    try{ a = await window.claude.use('artifact'); }catch(e){}
+    if(!a){ status='Saving is not available in this view.'; statusErr=true; renderBar(); return; }
+    status='Saving…'; statusErr=false; renderBar();
+    try{
+      dirty = false;
+      await a.publish(buildDoc());
+    }catch(e){
+      dirty = true;
+      var code = e && e.code;
+      if(code==='conflict') return;
+      if(code==='not_writer'||code==='not_granted'||code==='consent_required'){ canEdit=false; render(); return; }
+      status = code==='rate_limited' ? 'Too many saves. Wait a moment and try again.' : 'Could not save ('+(code||'error')+'). Try again.';
+      statusErr = true; renderBar();
+    }
+  }
+  window.addEventListener('beforeunload', function(e){ if(dirty && canEdit){ e.preventDefault(); e.returnValue=''; } });
+
+  /* ---------- pieces ---------- */
+  var root = document.getElementById('root');
+  var panel, bar;
+
+  function sortedStudents(){ return S.students.slice(); }
+
+  function attendancePanel(){
+    var rec = S.attendance[date] || {};
+    var counts = {P:0,A:0,L:0,U:0};
+    S.students.forEach(function(s){ var v=rec[s.id]; counts[v||'U']++; });
+    var wrap = h('div');
+    var dateIn = h('input',{type:'date',value:date,'aria-label':'Date',onchange:function(e){
+      date = e.target.value || todayStr();
+      try{ sessionStorage.setItem('fc-date',date); }catch(x){}
+      render();
+    }});
+    wrap.appendChild(h('div',{class:'card'},
+      h('div',{class:'row'}, h('label',{class:'f',style:'margin:0'},'Date'), h('div',{class:'grow'}, dateIn),
+        canEdit && S.students.length ? h('button',{class:'btn',onclick:function(){
+          var r = S.attendance[date] = S.attendance[date] || {};
+          S.students.forEach(function(s){ r[s.id]='P'; });
+          mark(); render();
+        }},'Mark all present') : null),
+      h('div',{class:'sum'},
+        h('span',{class:'chip P'},'Present '+counts.P),
+        h('span',{class:'chip A'},'Absent '+counts.A),
+        h('span',{class:'chip L'},'Late '+counts.L),
+        counts.U ? h('span',{class:'chip U'},'Not marked '+counts.U) : null)));
+    if(!S.students.length){
+      wrap.appendChild(h('div',{class:'card empty'}, canEdit ? 'No students yet. Add names in the Students tab.' : 'No students have been added yet.'));
+      return wrap;
+    }
+    var list = h('div',{class:'card'});
+    S.students.forEach(function(s){
+      var cur = rec[s.id];
+      var seg = h('div',{class:'seg',role:'group','aria-label':'Attendance for '+s.name});
+      [['P','Present'],['A','Absent'],['L','Late']].forEach(function(o){
+        seg.appendChild(h('button',{type:'button',class:(cur===o[0]?'on ':'')+o[0],'aria-pressed':cur===o[0]?'true':'false',disabled:!canEdit,onclick:function(){
+          var r = S.attendance[date] = S.attendance[date] || {};
+          if(r[s.id]===o[0]) delete r[s.id]; else r[s.id]=o[0];
+          mark(); render();
+        }},o[1]));
+      });
+      list.appendChild(h('div',{class:'stu'}, h('div',{class:'nm'},s.name), seg));
+    });
+    wrap.appendChild(list);
+
+    // totals per student
+    var rows = S.students.map(function(s){
+      var p=0,a=0,l=0;
+      Object.keys(S.attendance).forEach(function(d){ var v=S.attendance[d][s.id]; if(v==='P')p++; else if(v==='A')a++; else if(v==='L')l++; });
+      var tot = p+a+l;
+      return h('tr',null,h('td',null,s.name),h('td',null,p),h('td',null,a),h('td',null,l),h('td',null,tot?Math.round((p+l)/tot*100)+'%':'–'));
+    });
+    wrap.appendChild(h('div',{class:'card'},
+      h('h3',{style:'margin:0 0 8px;font-size:17px'},'Totals for all days'),
+      h('div',{class:'scroll'}, h('table',null,
+        h('thead',null,h('tr',null,h('th',null,'Student'),h('th',null,'Present'),h('th',null,'Absent'),h('th',null,'Late'),h('th',null,'Attended'))),
+        h('tbody',null,rows))),
+      h('p',{class:'msg',style:'margin:8px 0 0'},'Attended counts present and late days out of all marked days.')));
+    return wrap;
+  }
+
+  function studentsPanel(){
+    var wrap = h('div');
+    if(!canEdit){
+      var l = h('div',{class:'card'});
+      if(!S.students.length) l.appendChild(h('div',{class:'empty'},'No students have been added yet.'));
+      S.students.forEach(function(s){ l.appendChild(h('div',{class:'stu'},h('div',{class:'nm'},s.name))); });
+      wrap.appendChild(l); return wrap;
+    }
+    var list = h('div',{class:'card'});
+    if(!S.students.length) list.appendChild(h('div',{class:'empty'},'No students yet. Add the first name below.'));
+    S.students.forEach(function(s){
+      list.appendChild(h('div',{class:'stu'},
+        h('input',{type:'text',class:'grow',value:s.name,'aria-label':'Student name',oninput:function(e){ s.name=e.target.value; mark(); }}),
+        h('button',{class:'btn del',type:'button',onclick:function(){
+          if(!confirm('Remove '+(s.name||'this student')+'? Their attendance records will be removed too.')) return;
+          S.students = S.students.filter(function(x){return x.id!==s.id;});
+          Object.keys(S.attendance).forEach(function(d){ delete S.attendance[d][s.id]; });
+          mark(); render();
+        }},'Remove')));
+    });
+    wrap.appendChild(list);
+    var add = h('input',{type:'text',placeholder:'New student name','aria-label':'New student name'});
+    function doAdd(){
+      var v = add.value.trim(); if(!v) return;
+      v.split(/\n|,/).forEach(function(n){ n=n.trim(); if(n) S.students.push({id:uid(),name:n}); });
+      mark(); render();
+    }
+    add.addEventListener('keydown',function(e){ if(e.key==='Enter'){ e.preventDefault(); doAdd(); }});
+    wrap.appendChild(h('div',{class:'card'},
+      h('label',{class:'f',style:'margin-top:0'},'Add student'),
+      h('div',{class:'row'},h('div',{class:'grow'},add),h('button',{class:'btn pri',type:'button',onclick:doAdd},'Add')),
+      h('p',{class:'msg',style:'margin:8px 0 0'},'You can paste several names separated by commas.')));
+    return wrap;
+  }
+
+  var SECTIONS = {
+    log: {title:'Class log', empty:'Nothing logged yet.', fields:[
+      {k:'date',label:'Date',type:'date'},
+      {k:'title',label:'Topic',type:'text',ph:'What did you teach today?'},
+      {k:'body',label:'Details',type:'area',ph:'Vocabulary, grammar, activities…'}]},
+    homework: {title:'Homework', empty:'No homework yet.', fields:[
+      {k:'date',label:'Given on',type:'date'},
+      {k:'due',label:'Due on',type:'date',opt:true},
+      {k:'title',label:'Title',type:'text',ph:'Exercise 4, page 32'},
+      {k:'body',label:'Instructions',type:'area',ph:'What should students do?'},
+      {k:'link',label:'Link to a file or page (PDF, Excel, website)',type:'url',opt:true,upload:true}]},
+    notes: {title:'Notes', empty:'No notes yet.', fields:[
+      {k:'date',label:'Date',type:'date'},
+      {k:'title',label:'Title',type:'text',ph:'Note title'},
+      {k:'body',label:'Note',type:'area',ph:'Write anything you want to keep.'}]}
+  };
+
+  function sectionPanel(key){
+    var cfg = SECTIONS[key];
+    var wrap = h('div');
+    if(canEdit){
+      var inputs = {};
+      var form = h('div',{class:'card'});
+      cfg.fields.forEach(function(f){
+        var el;
+        if(f.type==='area') el = h('textarea',{placeholder:f.ph||''});
+        else el = h('input',{type:f.type==='url'?'url':f.type==='date'?'date':'text',placeholder:f.ph||'',value:f.type==='date'&&f.k==='date'?todayStr():''});
+        inputs[f.k] = el;
+        form.appendChild(h('label',{class:'f'},f.label));
+        form.appendChild(el);
+        if(f.upload && canUpload){
+          var note = h('span',{class:'msg'});
+          var file = h('input',{type:'file',accept:'.pdf,.xlsx,.xls,.csv,.png,.jpg,.jpeg,.txt,.md,.json',onchange:async function(e){
+            var fl = e.target.files && e.target.files[0]; if(!fl) return;
+            note.textContent='Uploading…';
+            try{ var r = await assetsApi.upload(fl); el.value = r.url; note.textContent='Uploaded: '+fl.name; }
+            catch(x){ note.textContent='Upload failed. Paste a link instead.'; }
+          }});
+          form.appendChild(h('div',{class:'row',style:'margin-top:6px'},file,note));
+        }
+      });
+      form.appendChild(h('div',{style:'margin-top:12px'},h('button',{class:'btn pri',type:'button',onclick:function(){
+        var item = {id:uid()};
+        cfg.fields.forEach(function(f){ item[f.k] = inputs[f.k].value.trim(); });
+        if(!item.title && !item.body){ inputs.title.focus(); return; }
+        S[key].push(item); mark(); render();
+      }},'Add to '+cfg.title.toLowerCase())));
+      wrap.appendChild(form);
+    }
+    var items = S[key].slice().sort(function(a,b){ return (b.date||'').localeCompare(a.date||''); });
+    if(!items.length) wrap.appendChild(h('div',{class:'card empty'},cfg.empty));
+    items.forEach(function(it){
+      var link = safeUrl(it.link);
+      var meta = fmtDate(it.date) + (it.due ? '  ·  Due '+fmtDate(it.due) : '');
+      wrap.appendChild(h('div',{class:'card item'},
+        h('div',{class:'row'},
+          h('div',{class:'grow'},
+            h('h3',null,it.title||'(no title)'),
+            h('div',{class:'meta'},meta)),
+          canEdit ? h('button',{class:'btn del',type:'button',onclick:function(){
+            if(!confirm('Delete this entry?')) return;
+            S[key] = S[key].filter(function(x){return x.id!==it.id;});
+            mark(); render();
+          }},'Delete') : null),
+        it.body ? h('p',null,it.body) : null,
+        link ? h('p',{style:'margin-top:8px'},h('a',{href:link,target:'_blank',rel:'noopener noreferrer'},'Open attached file or link')) : null));
+    });
+    return wrap;
+  }
+
+  var TABS = [
+    ['attendance','Attendance','Présence'],
+    ['log','Class log','Cahier de textes'],
+    ['homework','Homework','Devoirs'],
+    ['notes','Notes','Notes'],
+    ['students','Students','Élèves']
+  ];
+
+  function renderBar(){
+    if(!bar) return;
+    bar.innerHTML = '';
+    if(!canEdit){ bar.style.display='none'; return; }
+    bar.style.display='';
+    bar.appendChild(h('div',{class:'in'},
+      h('span',{class:'msg'+(statusErr?' err':'')}, status || (dirty ? 'You have unsaved changes.' : 'All changes saved.')),
+      h('button',{class:'btn pri',type:'button',disabled:!dirty,onclick:save},'Save changes')));
+  }
+
+  function render(){
+    root.innerHTML = '';
+    var title;
+    if(canEdit){
+      title = h('h1',null,h('input',{type:'text',value:S.className||'',placeholder:'Class name','aria-label':'Class name',oninput:function(e){ S.className=e.target.value; mark(); }}));
+    } else {
+      title = h('h1',null,S.className||'French Class');
+    }
+    root.appendChild(h('header',{class:'top'},h('div',{class:'in'},
+      title,
+      h('p',{class:'sub'},'Attendance, class log, homework and notes'),
+      h('span',{class:'badge'+(canEdit?' edit':'')},canEdit?'Editing mode':'View only'))));
+    var wrap = h('div',{class:'wrap'});
+    var nav = h('nav',{class:'tabs',role:'tablist'});
+    TABS.forEach(function(t){
+      nav.appendChild(h('button',{type:'button',role:'tab','aria-selected':tab===t[0]?'true':'false',onclick:function(){
+        tab=t[0]; try{ sessionStorage.setItem('fc-tab',tab); }catch(e){} render();
+      }},t[1],h('small',null,t[2])));
+    });
+    wrap.appendChild(nav);
+    if(tab==='attendance') panel = attendancePanel();
+    else if(tab==='students') panel = studentsPanel();
+    else panel = sectionPanel(tab);
+    wrap.appendChild(panel);
+    root.appendChild(wrap);
+    bar = h('div',{class:'savebar'});
+    root.appendChild(bar);
+    renderBar();
+  }
+
+  render();
+
+  /* ---------- capabilities (light up when available) ---------- */
+  (async function(){
+    try{
+      if(!window.claude || !window.claude.use) return;
+      var results = await Promise.all([window.claude.use('user'), window.claude.use('artifact'), window.claude.use('assets')]);
+      var user = results[0], art = results[1];
+      assetsApi = results[2];
+      canUpload = !!assetsApi;
+      var ok = false;
+      try{ ok = !!(user && user.canEdit()); }catch(e){}
+      if(ok && art){ canEdit = true; render(); }
+    }catch(e){}
+  })();
+})();
+</script>
+</body>
+</html>
