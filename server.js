@@ -8,7 +8,9 @@ const app = express();
 app.set('trust proxy', 1);
 
 const PASSWORD = process.env.TEACHER_PASSWORD || '';
-if (!PASSWORD) console.error('WARNING: TEACHER_PASSWORD is not set. Nobody will be able to log in.');
+// Open editing: anyone with the link can add and change things, no password.
+// To require the teacher password again, set the environment variable REQUIRE_PASSWORD=true.
+const OPEN = process.env.REQUIRE_PASSWORD !== 'true';
 const SECRET = process.env.SESSION_SECRET || crypto.createHash('sha256').update('fc:' + PASSWORD).digest('hex');
 
 const pool = new Pool({
@@ -34,6 +36,7 @@ function throttled(ip) {
 }
 
 function requireTeacher(req, res, next) {
+  if (OPEN) return next();
   const h = req.get('authorization') || '';
   const tok = h.startsWith('Bearer ') ? h.slice(7) : '';
   if (PASSWORD && tok && safeEq(tok, makeToken())) return next();
@@ -92,6 +95,7 @@ app.get('/api/data', wrap(async (req, res) => {
   at.rows.forEach((r) => { (attendance[r.d] = attendance[r.d] || {})[r.student_id] = r.status; });
   res.set('Cache-Control', 'no-store');
   res.json({
+    open: OPEN,
     className: cn.rows[0] ? cn.rows[0].value : 'French Class',
     students: st.rows,
     attendance,

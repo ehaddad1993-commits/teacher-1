@@ -100,7 +100,7 @@ th{color:var(--muted);font-weight:600}
     var dt = new Date(+p[0], +p[1]-1, +p[2]);
     try{ return dt.toLocaleDateString(undefined,{weekday:'short',day:'numeric',month:'short',year:'numeric'}); }catch(e){ return d; }
   }
-  function canEdit(){ return !!token; }
+  function canEdit(){ return !!token || !!S.open; }
 
   function h(tag, props){
     var e = document.createElement(tag);
@@ -365,10 +365,10 @@ th{color:var(--muted);font-weight:600}
       title,
       h('p',{class:'sub'},'Attendance, class log, homework and notes'),
       h('div',{class:'hrow'},
-        h('span',{class:'badge'+(canEdit()?' edit':'')},canEdit()?'Teacher mode':'View only'),
-        canEdit()
+        h('span',{class:'badge'+(canEdit()?' edit':'')},S.open?'Open: anyone can add':(canEdit()?'Teacher mode':'View only')),
+        S.open ? null : (canEdit()
           ? h('button',{class:'btn',type:'button',onclick:function(){ logout(); render(); }},'Log out')
-          : h('button',{class:'btn',type:'button',onclick:function(){ showLogin=!showLogin; loginErr=''; render(); }},'Teacher login')),
+          : h('button',{class:'btn',type:'button',onclick:function(){ showLogin=!showLogin; loginErr=''; render(); }},'Teacher login'))),
       (!canEdit() && showLogin) ? loginBox() : null)));
     var wrap = h('div',{class:'wrap'});
     var nav = h('nav',{class:'tabs',role:'tablist'});
